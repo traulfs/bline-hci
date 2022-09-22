@@ -3,7 +3,7 @@ package hci
 import (
 	"sync"
 
-	"github.com/go-ble/ble/bline/hci/cmd"
+	"github.com/traulfs/bline-hci/bline/hci/cmd"
 )
 
 type params struct {
