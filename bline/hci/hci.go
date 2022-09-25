@@ -39,6 +39,7 @@ type pkt struct {
 func NewHCI(opts ...ble.Option) (*HCI, error) {
 	h := &HCI{
 		id: -1,
+		bl: nil,
 
 		chCmdPkt:  make(chan *pkt),
 		chCmdBufs: make(chan []byte, 16),
@@ -71,6 +72,7 @@ type HCI struct {
 
 	skt io.ReadWriteCloser
 	id  int
+	bl  *socket.BeaconLine
 
 	// Host to Controller command flow control [Vol 2, Part E, 4.4]
 	chCmdPkt  chan *pkt
@@ -142,7 +144,7 @@ func (h *HCI) Init() error {
 	// evt.LEReadRemoteUsedFeaturesCompleteSubCode:   todo),
 	// evt.LERemoteConnectionParameterRequestSubCode: todo),
 
-	skt, err := socket.NewSocket(h.id)
+	skt, err := socket.NewSocket(h.bl, h.id)
 	if err != nil {
 		return err
 	}

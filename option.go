@@ -5,10 +5,12 @@ import (
 
 	"github.com/traulfs/bline-hci/bline/hci/cmd"
 	"github.com/traulfs/bline-hci/bline/hci/evt"
+	"github.com/traulfs/bline-hci/bline/hci/socket"
 )
 
 // DeviceOption is an interface which the device should implement to allow using configuration options
 type DeviceOption interface {
+	SetBeaconLine(*socket.BeaconLine) error
 	SetDeviceID(int) error
 	SetDialerTimeout(time.Duration) error
 	SetListenerTimeout(time.Duration) error

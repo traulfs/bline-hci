@@ -7,7 +7,14 @@ import (
 	"github.com/traulfs/bline-hci/bline/hci/evt"
 
 	"github.com/traulfs/bline-hci/bline/hci/cmd"
+	"github.com/traulfs/bline-hci/bline/hci/socket"
 )
+
+// SetBeaconLine
+func (h *HCI) SetBeaconLine(bl *socket.BeaconLine) error {
+	h.bl = bl
+	return nil
+}
 
 // SetDeviceID sets HCI device ID.
 func (h *HCI) SetDeviceID(id int) error {
