@@ -23,6 +23,7 @@ type BeaconLine struct {
 // Socket implements a HCI User Channel as ReadWriteCloser.
 type Socket struct {
 	fd     int
+	bl     *BeaconLine
 	closed chan struct{}
 	rmu    sync.Mutex
 	wmu    sync.Mutex
@@ -75,7 +76,7 @@ func (bl *BeaconLine) BeaconLineInit() error {
 func NewSocket(bl *BeaconLine, id int) (*Socket, error) {
 	//fmt.Printf("HCI-id: %d\n", id)
 	bl.payloadGet[byte(id*5+1)] = make(chan []byte, 100)
-	return &Socket{fd: id, closed: make(chan struct{})}, nil
+	return &Socket{fd: id, bl: bl, closed: make(chan struct{})}, nil
 }
 
 func (s *Socket) Read(p []byte) (int, error) {
@@ -85,7 +86,7 @@ func (s *Socket) Read(p []byte) (int, error) {
 		select {
 		case <-s.closed:
 			return 0, io.EOF
-		case payload := <-payloadGet[byte(s.fd*5+1)]:
+		case payload := <-s.bl.payloadGet[byte(s.fd*5+1)]:
 			n := copy(p, payload)
 			return n, nil
 		}
@@ -95,7 +96,7 @@ func (s *Socket) Read(p []byte) (int, error) {
 func (s *Socket) Write(p []byte) (int, error) {
 	s.wmu.Lock()
 	defer s.wmu.Unlock()
-	tdPut <- DataTsb{Ch: []byte{byte(s.fd*5 + 1)}, Typ: []byte{0x15}, Payload: p}
+	s.bl.tdPut <- DataTsb{Ch: []byte{byte(s.fd*5 + 1)}, Typ: []byte{0x15}, Payload: p}
 	return len(p), nil
 }
 
@@ -103,7 +104,7 @@ func (s *Socket) Close() error {
 	//fmt.Printf("Close called\n")
 	close(s.closed)
 	s.Write([]byte{0x01, 0x09, 0x10, 0x00}) // no-op command to wake up the Read call if it's blocked
-	delete(payloadGet, byte(s.fd*5+1))
+	delete(s.bl.payloadGet, byte(s.fd*5+1))
 	s.rmu.Lock()
 	defer s.rmu.Unlock()
 	return nil
