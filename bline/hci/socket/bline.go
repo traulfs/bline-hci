@@ -8,42 +8,51 @@ import (
 	"sync"
 )
 
+type BeaconLine struct {
+	name       string
+	url        string
+	tsbPort    int
+	anchors    int
+	conn       net.Conn
+	tdPut      chan DataTsb
+	tdGet      chan DataTsb
+	tdDone     chan struct{}
+	payloadGet map[byte]chan []byte
+}
+
 // Socket implements a HCI User Channel as ReadWriteCloser.
 type Socket struct {
-	fd int
-	//conn   net.Conn
-	//tdPut  chan DataTsb
-
-	//tdDone chan struct{}
+	fd     int
 	closed chan struct{}
 	rmu    sync.Mutex
 	wmu    sync.Mutex
 }
 
-var tdPut chan DataTsb
-var tdGet chan DataTsb
-var tdDone chan struct{}
-var payloadGet = make(map[byte]chan []byte)
+func NewBeaconLine(name string, url string, tsbPort int, anchors int) (*BeaconLine, error) {
+	return &BeaconLine{name: name, url: url, tsbPort: tsbPort, anchors: anchors}, nil
+}
 
-func TsbInit(url string) error {
-	conn, err := net.Dial("tcp", url)
+func (bl *BeaconLine) BeaconLineInit() error {
+	var err error
+	bl.conn, err = net.Dial("tcp", bl.url)
 	if err != nil {
 		log.Fatal(err)
 	}
-	fmt.Printf("client connected to tcp://%s \n", url)
-	tdPut = PutData(conn)
-	tdGet, tdDone = GetData(conn)
-	TsbServer(3000)
+	bl.payloadGet = make(map[byte]chan []byte)
+	fmt.Printf("client connected to tcp://%s \n", bl.url)
+	bl.tdPut = PutData(bl.conn)
+	bl.tdGet, bl.tdDone = GetData(bl.conn)
+	TsbServer(bl.tsbPort)
 	go func() {
 		for {
 			select {
-			case <-tdDone:
+			case <-bl.tdDone:
 				fmt.Printf("client connection closed!")
 				return
-			case td := <-tdGet:
+			case td := <-bl.tdGet:
 				if td.Typ[0] == TypHci {
-					if payloadGet[td.Ch[0]] != nil {
-						payloadGet[td.Ch[0]] <- td.Payload
+					if bl.payloadGet[td.Ch[0]] != nil {
+						bl.payloadGet[td.Ch[0]] <- td.Payload
 					} else {
 						//fmt.Printf("tsb channel not initialized: ch: %x, typ: %x payload: % x\n", td.Ch, td.Typ, td.Payload)
 					}
@@ -63,9 +72,9 @@ func TsbInit(url string) error {
 
 // NewSocket returns a HCI User Channel of specified device id.
 // If id is -1, the first available HCI device is returned.
-func NewSocket(id int) (*Socket, error) {
+func NewSocket(bl *BeaconLine, id int) (*Socket, error) {
 	//fmt.Printf("HCI-id: %d\n", id)
-	payloadGet[byte(id*5+1)] = make(chan []byte, 100)
+	bl.payloadGet[byte(id*5+1)] = make(chan []byte, 100)
 	return &Socket{fd: id, closed: make(chan struct{})}, nil
 }
 
