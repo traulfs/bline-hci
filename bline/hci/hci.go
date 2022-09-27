@@ -441,7 +441,7 @@ func (h *HCI) handleLEAdvertisingReport(b []byte) error {
 		default:
 			a = newAdvertisement(e, i)
 		}
-		go h.advHandler(a, h.id)
+		go h.advHandler(a, h.bl, h.id)
 	}
 
 	return nil

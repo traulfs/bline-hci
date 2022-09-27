@@ -1,7 +1,9 @@
 package ble
 
+import "github.com/traulfs/bline-hci/bline/hci/socket"
+
 // AdvHandler handles advertisement.
-type AdvHandler func(a Advertisement, anchor int)
+type AdvHandler func(a Advertisement, bl *socket.BeaconLine, anchor int)
 
 // AdvFilter returns true if the advertisement matches specified condition.
 type AdvFilter func(a Advertisement) bool
