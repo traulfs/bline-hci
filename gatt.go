@@ -135,7 +135,7 @@ func Connect(ctx context.Context, f AdvFilter) (Client, error) {
 	}()
 
 	ch := make(chan Advertisement)
-	fn := func(a Advertisement, bl *socket.BeaconLine, anchor int) {
+	fn := func(a Advertisement, bline *socket.BeaconLine, anchor int) {
 		cancel()
 		ch <- a
 	}
