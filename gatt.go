@@ -7,6 +7,7 @@ import (
 	"syscall"
 
 	"github.com/pkg/errors"
+	"github.com/traulfs/bline-hci/bline/hci/socket"
 )
 
 // ErrDefaultDevice ...
@@ -92,9 +93,9 @@ func Scan(ctx context.Context, allowDup bool, h AdvHandler, f AdvFilter) error {
 		return defaultDevice.Scan(ctx, allowDup, h)
 	}
 
-	h2 := func(a Advertisement, anchor int) {
+	h2 := func(a Advertisement, bl *socket.BeaconLine, anchor int) {
 		if f(a) {
-			h(a, anchor)
+			h(a, bl, anchor)
 		}
 	}
 	return defaultDevice.Scan(ctx, allowDup, h2)

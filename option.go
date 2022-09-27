@@ -27,6 +27,14 @@ type DeviceOption interface {
 type Option func(DeviceOption) error
 
 // OptDeviceID sets HCI device ID.
+func OptBeaconLine(bl *socket.BeaconLine) Option {
+	return func(opt DeviceOption) error {
+		opt.SetBeaconLine(bl)
+		return nil
+	}
+}
+
+// OptDeviceID sets HCI device ID.
 func OptDeviceID(id int) Option {
 	return func(opt DeviceOption) error {
 		opt.SetDeviceID(id)
