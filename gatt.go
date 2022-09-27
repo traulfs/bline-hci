@@ -107,7 +107,7 @@ func Find(ctx context.Context, allowDup bool, f AdvFilter) ([]Advertisement, err
 		return nil, ErrDefaultDevice
 	}
 	var advs []Advertisement
-	h := func(a Advertisement, anchor int) {
+	h := func(a Advertisement, bl *socket.BeaconLine, anchor int) {
 		advs = append(advs, a)
 	}
 	defer untrap(trap(ctx))
@@ -135,7 +135,7 @@ func Connect(ctx context.Context, f AdvFilter) (Client, error) {
 	}()
 
 	ch := make(chan Advertisement)
-	fn := func(a Advertisement, anchor int) {
+	fn := func(a Advertisement, bl *socket.BeaconLine, anchor int) {
 		cancel()
 		ch <- a
 	}
