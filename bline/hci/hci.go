@@ -279,8 +279,7 @@ func (h *HCI) send(c Command) ([]byte, error) {
 	timeout := time.NewTimer(5 * time.Second)
 	select {
 	case <-timeout.C:
-		fmt.Printf("no hci response timeout\n")
-
+		//fmt.Printf("no hci response timeout\n")
 		err = fmt.Errorf("hci: no response to command, hci connection failed")
 		ret = nil
 	case <-h.done:
