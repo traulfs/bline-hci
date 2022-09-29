@@ -33,6 +33,10 @@ func NewBeaconLine(name string, url string, tsbPort int, anchors int) (*BeaconLi
 	return &BeaconLine{name: name, url: url, tsbPort: tsbPort, anchors: anchors}, nil
 }
 
+func (bl *BeaconLine) Name() string {
+	return (bl.name)
+}
+
 func (bl *BeaconLine) BeaconLineInit() error {
 	var err error
 	bl.conn, err = net.Dial("tcp", bl.url)
