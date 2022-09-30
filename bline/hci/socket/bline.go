@@ -3,7 +3,6 @@ package socket
 import (
 	"fmt"
 	"io"
-	"log"
 	"net"
 	"sync"
 )
@@ -41,7 +40,7 @@ func (bl *BeaconLine) BeaconLineInit() error {
 	var err error
 	bl.conn, err = net.Dial("tcp", bl.url)
 	if err != nil {
-		log.Fatal(err)
+		return err
 	}
 	bl.payloadGet = make(map[byte]chan []byte)
 	fmt.Printf("client connected to tcp://%s \n", bl.url)
