@@ -9,11 +9,13 @@ import (
 	"os"
 	"os/signal"
 	"syscall"
+
+	"github.com/traulfs/tsb"
 )
 
 var clientRW map[io.ReadWriter]byte
-var TsbOut chan DataTsb
-var TsbIn chan DataTsb
+var TsbOut chan tsb.TsbData
+var TsbIn chan tsb.TsbData
 
 //var TsbDone chan struct{}
 
@@ -23,8 +25,8 @@ func TsbServer(port int) {
 	if err != nil {
 		log.Fatal(err)
 	}
-	TsbIn = make(chan DataTsb, 100)
-	TsbOut = make(chan DataTsb, 100)
+	TsbIn = make(chan tsb.TsbData, 100)
+	TsbOut = make(chan tsb.TsbData, 100)
 	//TsbDone = make(chan struct{})
 	clientRW = make(map[io.ReadWriter]byte)
 	go acceptConnection(ln)
@@ -37,12 +39,9 @@ func TsbServer(port int) {
 			select {
 			case td := <-TsbOut:
 				{
-					out := CobsEncode(Encode(td))
+					out := tsb.CobsEncode(tsb.Encode(td))
 					for rw := range clientRW {
 						rw.Write(out)
-					}
-					if Verbose {
-						fmt.Printf("TSB-Write: Ch: 0x%X Typ: 0x%X Payload 0x% X\n", td.Ch, td.Typ, td.Payload)
 					}
 				}
 			case <-exitSignalCh:
@@ -68,14 +67,14 @@ func acceptConnection(ln net.Listener) {
 }
 
 func handleConnection(conn io.ReadWriter) {
-	if Verbose {
+	if tsb.Verbose {
 		fmt.Printf("%v: Got incoming TSB connection\n", conn)
 	}
 	clientRW[conn] = 0
 	done := getTsbData(conn)
 	<-done
 	delete(clientRW, conn)
-	if Verbose {
+	if tsb.Verbose {
 		fmt.Printf("%v: TSB Connection closed\n", conn)
 	}
 }
@@ -98,16 +97,19 @@ func getTsbData(r io.Reader) chan struct{} {
 			for p := 0; p < n; p++ {
 				cb.WriteByte(buf[p])
 				if buf[p] == 0x00 {
-					packet := CobsDecode(cb.Bytes())
-					if len(packet) >= 4 {
-						td, err := Decode(packet)
+					packet, err := tsb.CobsDecode(cb.Bytes())
+					if err != nil {
+						log.Print(err)
+						fmt.Printf("\ttsb.CobsDecode packet: %x\n", cb.Bytes())
+					} else {
+						td, err := tsb.Decode(packet)
 						if err != nil {
 							log.Print(err)
+							fmt.Printf("\ttsb.CobsDecode packet: %x\n", cb.Bytes())
+							fmt.Printf("\ttsb.Decode packet: %x\n", packet)
 						} else {
 							TsbIn <- td
 						}
-					} else {
-						fmt.Printf("TSB-Read: Wrong cobs packet! packet= % X, buf= % X\n", packet, cb.Bytes())
 					}
 					cb.Reset()
 				}

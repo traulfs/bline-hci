@@ -5,6 +5,8 @@ import (
 	"io"
 	"net"
 	"sync"
+
+	"github.com/traulfs/tsb"
 )
 
 type BeaconLine struct {
@@ -13,8 +15,8 @@ type BeaconLine struct {
 	tsbPort    int
 	anchors    int
 	conn       net.Conn
-	tdPut      chan DataTsb
-	tdGet      chan DataTsb
+	tdPut      chan tsb.TsbData
+	tdGet      chan tsb.TsbData
 	tdDone     chan struct{}
 	payloadGet map[byte]chan []byte
 }
@@ -44,8 +46,8 @@ func (bl *BeaconLine) BeaconLineInit() error {
 	}
 	bl.payloadGet = make(map[byte]chan []byte)
 	fmt.Printf("client connected to tcp://%s \n", bl.url)
-	bl.tdPut = PutData(bl.conn)
-	bl.tdGet, bl.tdDone = GetData(bl.conn)
+	bl.tdPut = tsb.PutData(bl.conn)
+	bl.tdGet, bl.tdDone = tsb.GetData(bl.conn)
 	TsbServer(bl.tsbPort)
 	go func() {
 		for {
@@ -54,15 +56,15 @@ func (bl *BeaconLine) BeaconLineInit() error {
 				fmt.Printf("client connection closed!")
 				return
 			case td := <-bl.tdGet:
-				if td.Typ[0] == TypHci {
+				if td.Typ[0] == tsb.TypHci {
 					if bl.payloadGet[td.Ch[0]] != nil {
 						bl.payloadGet[td.Ch[0]] <- td.Payload
-					} else {
+						//} else {
 						//fmt.Printf("tsb channel not initialized: ch: %x, typ: %x payload: % x\n", td.Ch, td.Typ, td.Payload)
 					}
 				} else {
 					TsbOut <- td
-					if td.Typ[0] != TypUnknown {
+					if td.Typ[0] != tsb.TypError {
 						fmt.Printf("Unexpected tsb-packet: ch: %x, typ: %x payload: % x\n", td.Ch, td.Typ, td.Payload)
 					} else {
 						fmt.Printf("Anchor: %2d says: %s\n", td.Ch[0]/5, td.Payload)
@@ -99,7 +101,7 @@ func (s *Socket) Read(p []byte) (int, error) {
 func (s *Socket) Write(p []byte) (int, error) {
 	s.wmu.Lock()
 	defer s.wmu.Unlock()
-	s.bl.tdPut <- DataTsb{Ch: []byte{byte(s.fd*5 + 1)}, Typ: []byte{0x15}, Payload: p}
+	s.bl.tdPut <- tsb.TsbData{Ch: []byte{byte(s.fd*5 + 1)}, Typ: []byte{0x15}, Payload: p}
 	return len(p), nil
 }
 
