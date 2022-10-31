@@ -1,5 +1,6 @@
 make --dry-run --always-make --keep-going --print-directory
 make: Entering directory `/Users/thorsten/go/src/traulfs/bline-hci'
+ 
 make: Leaving directory `/Users/thorsten/go/src/traulfs/bline-hci'
  
 make: *** No targets specified and no makefile found.  Stop.
