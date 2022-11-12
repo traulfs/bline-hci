@@ -7,7 +7,7 @@ make all --print-data-base --no-builtin-variables --no-builtin-rules --question
 
 # This program built for i386-apple-darwin11.3.0
 
-# Make data base, printed on Fri Oct 28 16:37:34 2022
+# Make data base, printed on Sat Nov 12 11:30:01 2022
 
 # Variables
 
@@ -28,7 +28,7 @@ CURDIR := /Users/thorsten/go/src/traulfs/bline-hci
 # makefile
 SHELL = /bin/sh
 # environment
-VSCODE_NLS_CONFIG = {"locale":"de","availableLanguages":{"*":"de"},"_languagePackId":"c8764e75f908c4fe452515ed5c6b4f1b.de","_translationsConfigFile":"/Users/thorsten/Library/Application Support/Code/clp/c8764e75f908c4fe452515ed5c6b4f1b.de/tcf.json","_cacheRoot":"/Users/thorsten/Library/Application Support/Code/clp/c8764e75f908c4fe452515ed5c6b4f1b.de","_resolvedLanguagePackCoreLocation":"/Users/thorsten/Library/Application Support/Code/clp/c8764e75f908c4fe452515ed5c6b4f1b.de/d045a5eda657f4d7b676dedbfa7aab8207f8a075","_corruptedFile":"/Users/thorsten/Library/Application Support/Code/clp/c8764e75f908c4fe452515ed5c6b4f1b.de/corrupted.info","_languagePackSupport":true}
+VSCODE_NLS_CONFIG = {"locale":"de","availableLanguages":{"*":"de"},"_languagePackId":"04f7ba4b39ffc394cb431776b98291e1.de","_translationsConfigFile":"/Users/thorsten/Library/Application Support/Code/clp/04f7ba4b39ffc394cb431776b98291e1.de/tcf.json","_cacheRoot":"/Users/thorsten/Library/Application Support/Code/clp/04f7ba4b39ffc394cb431776b98291e1.de","_resolvedLanguagePackCoreLocation":"/Users/thorsten/Library/Application Support/Code/clp/04f7ba4b39ffc394cb431776b98291e1.de/6261075646f055b99068d3688932416f2346dd3b","_corruptedFile":"/Users/thorsten/Library/Application Support/Code/clp/04f7ba4b39ffc394cb431776b98291e1.de/corrupted.info","_languagePackSupport":true}
 # environment
 _ = /usr/bin/make
 # environment
@@ -52,19 +52,17 @@ GOROOT = /usr/local/go
 # environment
 GOPATH = /Users/thorsten/go
 # environment
-LaunchInstanceID = EBCCC3FA-692A-424F-A957-1C63D86AE4C2
-# environment
 ELECTRON_RUN_AS_NODE = 1
 # environment
 ANDROID_HOME = /Users/thorsten/Library/Android/Sdk
 # default
 .FEATURES := target-specific order-only second-expansion else-if archives jobserver check-symlink
 # environment
-SSH_AUTH_SOCK = /private/tmp/com.apple.launchd.rHkO4LDd0w/Listeners
+SSH_AUTH_SOCK = /private/tmp/com.apple.launchd.UfnGkekrvr/Listeners
 # automatic
 %F = $(notdir $%)
 # environment
-DISPLAY = /private/tmp/com.apple.launchd.FqJskbuHCP/org.xquartz:0
+DISPLAY = /private/tmp/com.apple.launchd.zFPao93NuW/org.xquartz:0
 # environment
 CONDA_EXE = /Users/thorsten/opt/anaconda3/bin/conda
 # environment
@@ -84,7 +82,7 @@ MAKEFILEPATH := /Applications/Xcode.app/Contents/Developer/Makefiles
 # environment
 VSCODE_CLI = 1
 # environment
-VSCODE_CODE_CACHE_PATH = /Users/thorsten/Library/Application Support/Code/CachedData/d045a5eda657f4d7b676dedbfa7aab8207f8a075
+VSCODE_CODE_CACHE_PATH = /Users/thorsten/Library/Application Support/Code/CachedData/6261075646f055b99068d3688932416f2346dd3b
 # environment
 LOGNAME = thorsten
 # environment
@@ -112,13 +110,13 @@ USER = thorsten
 # makefile
 .DEFAULT_GOAL := 
 # environment
-TERM_SESSION_ID = DE9C3E56-4040-4686-9989-F5A5ECA66F84
+TERM_SESSION_ID = 1B5AB63A-D667-4F7D-9ADC-972DCFEA9440
 # automatic
 %D = $(patsubst %/,%,$(dir $%))
 # environment
 CONDA_SHLVL = 2
-# default
-MAKE_COMMAND := /Applications/Xcode.app/Contents/Developer/usr/bin/make
+# environment
+TERM_SESSION_CLASS_ID = 962EF1A3-5A58-4490-AFA2-92F27DA5270A
 # environment
 TERM_PROGRAM = Apple_Terminal
 # default
@@ -128,7 +126,7 @@ TMPDIR = /var/folders/yt/7tyqb03d4ns90njkb13mlxlr0000gn/T/
 # automatic
 *F = $(notdir $*)
 # environment
-VSCODE_IPC_HOOK = /Users/thorsten/Library/Application Support/Code/1.72.2-main.sock
+VSCODE_IPC_HOOK = /Users/thorsten/Library/Application Support/Code/1.73.1-main.sock
 # environment
 MallocNanoZone = 0
 # makefile
@@ -140,7 +138,7 @@ MFLAGS = -Rrqp
 # environment
 TERM_PROGRAM_VERSION = 447
 # environment
-XPC_SERVICE_NAME = application.com.microsoft.VSCode.47019467.47019473.6AC59EF4-2BDB-4F62-A5CE-C5B9A53B1CBA
+XPC_SERVICE_NAME = application.com.microsoft.VSCode.51437040.51437049.566F2727-3123-4C75-A5E3-420F8A270433
 # environment
 HOMEBREW_PREFIX = /opt/homebrew
 # automatic
@@ -149,6 +147,8 @@ HOMEBREW_PREFIX = /opt/homebrew
 +F = $(notdir $+)
 # environment
 HOMEBREW_REPOSITORY = /opt/homebrew
+# default
+MAKE_COMMAND := /Applications/Xcode.app/Contents/Developer/usr/bin/make
 # environment
 __CF_USER_TEXT_ENCODING = 0x1F5:0x0:0x3
 # environment
@@ -161,8 +161,6 @@ MAKEFILES :=
 LC_ALL = C
 # environment
 CONDA_PYTHON_EXE = /Users/thorsten/opt/anaconda3/bin/python
-# environment
-SECURITYSESSIONID = 186b3
 # automatic
 ^F = $(notdir $^)
 # default
@@ -178,13 +176,13 @@ CONDA_PREFIX = /Users/thorsten/opt/anaconda3
 # environment
 TERM = xterm-256color
 # environment
-VSCODE_PID = 597
+VSCODE_PID = 1474
 # environment
 _CE_CONDA = 
 # environment
 LANG = C
 # variable set hash-table stats:
-# Load=86/1024=8%, Rehash=0, Collisions=4/107=4%
+# Load=85/1024=8%, Rehash=0, Collisions=5/106=5%
 
 # Pattern-specific Variable Values
 
@@ -192,7 +190,7 @@ LANG = C
 
 # Directories
 
-# . (device 16777234, inode 39743337): 27 files, no impossibilities.
+# . (device 16777233, inode 39743337): 27 files, no impossibilities.
 
 # 27 files, no impossibilities in 1 directories.
 
@@ -266,7 +264,7 @@ GNUmakefile:
 # strcache size: total = 0 / max = 0 / min = 4096 / avg = 0
 # strcache free: total = 0 / max = 0 / min = 4096 / avg = 0
 
-# Finished Make data base on Fri Oct 28 16:37:34 2022
+# Finished Make data base on Sat Nov 12 11:30:01 2022
 
  
 make: *** No rule to make target `all'.  Stop.
