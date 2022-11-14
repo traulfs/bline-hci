@@ -20,10 +20,10 @@ github.com/stretchr/testify v1.7.1/go.mod h1:6Fq8oRcR53rry900zMqJjRRixrwX3KX962/
 github.com/stretchr/testify v1.8.0/go.mod h1:yNjHg4UonilssWZ8iaSj1OCr/vHnekPRkoO+kdMU+MU=
 github.com/stretchr/testify v1.8.1 h1:w7B6lhMri9wdJUVmEZPGGhZzrYTPvgJArz7wNPgYKsk=
 github.com/stretchr/testify v1.8.1/go.mod h1:w2LPCIKwWwSfY2zedu0+kehJoqGctiVI29o6fzry7u4=
-github.com/traulfs/serial v0.0.0-20221031100820-7163c15ebf3c h1:7zMNV8mX0Yx2JnSf9rlkDTyFkXmHQJTB1+VRIBzXv+g=
-github.com/traulfs/serial v0.0.0-20221031100820-7163c15ebf3c/go.mod h1:unOKybdiE4varJ1lfpwCkH19FZUa1LnqQefn/K3Ri1w=
-github.com/traulfs/tsb v0.0.0-20221031102447-4583b254655d h1:AUvVuHQEkl1hicR0Kcx9xiioVoJBZtuf8EzUNgSq+VQ=
-github.com/traulfs/tsb v0.0.0-20221031102447-4583b254655d/go.mod h1:1sP0YN5tZFXp9moSDumjRugXLZTqWWNhfVFXiIHdP/I=
+github.com/tarm/serial v0.0.0-20180830185346-98f6abe2eb07 h1:UyzmZLoiDWMRywV4DUYb9Fbt8uiOSooupjTq10vpvnU=
+github.com/tarm/serial v0.0.0-20180830185346-98f6abe2eb07/go.mod h1:kDXzergiv9cbyO7IOYJZWg1U88JhDg3PB6klq9Hg2pA=
+github.com/traulfs/tsb v0.0.0-20221114204004-ca4e4ba3ee16 h1:DPa5RVw+C+CcLSsmWyxUQa8KZVCdzplB3VOnxb23Gw8=
+github.com/traulfs/tsb v0.0.0-20221114204004-ca4e4ba3ee16/go.mod h1:YDqX4DY8+U/SoLG22Ye41zDaGicwL1K3xi9jLR3BT0c=
 golang.org/x/sys v0.0.0-20220811171246-fbc7d0a398ab/go.mod h1:oPkhp1MJrh7nUepCBck5+mAzfO9JrbApNNgaTdGDITg=
 golang.org/x/sys v0.1.0 h1:kunALQeHf1/185U1i0GOB/fy1IPRDDpuoOOqRReG57U=
 golang.org/x/sys v0.1.0/go.mod h1:oPkhp1MJrh7nUepCBck5+mAzfO9JrbApNNgaTdGDITg=
