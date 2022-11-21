@@ -10,9 +10,9 @@ import (
 )
 
 type BeaconLine struct {
-	name       string
-	url        string
-	tsbPort    int
+	name string
+	url  string
+	//tsbPort    int
 	anchors    int
 	conn       net.Conn
 	tdPut      chan tsb.TsbData
@@ -30,8 +30,8 @@ type Socket struct {
 	wmu    sync.Mutex
 }
 
-func NewBeaconLine(name string, url string, tsbPort int, anchors int) (*BeaconLine, error) {
-	return &BeaconLine{name: name, url: url, tsbPort: tsbPort, anchors: anchors}, nil
+func NewBeaconLine(name string, url string, anchors int) (*BeaconLine, error) {
+	return &BeaconLine{name: name, url: url, anchors: anchors}, nil
 }
 
 func (bl *BeaconLine) Name() string {
@@ -48,7 +48,7 @@ func (bl *BeaconLine) BeaconLineInit() error {
 	fmt.Printf("client connected to tcp://%s \n", bl.url)
 	bl.tdPut = tsb.PutData(bl.conn)
 	bl.tdGet, bl.tdDone = tsb.GetData(bl.conn)
-	TsbServer(bl.tsbPort)
+	//TsbServer(bl.tsbPort)
 	go func() {
 		for {
 			select {
