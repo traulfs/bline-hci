@@ -38,7 +38,7 @@ func (bl *BeaconLine) Name() string {
 	return (bl.name)
 }
 
-func (bl *BeaconLine) BeaconLineInit() error {
+func (bl *BeaconLine) BeaconLineInit(errChan chan []byte) error {
 	var err error
 	bl.conn, err = net.Dial("tcp", bl.url)
 	if err != nil {
@@ -65,9 +65,11 @@ func (bl *BeaconLine) BeaconLineInit() error {
 				} else {
 					TsbOut <- td
 					if td.Typ[0] != tsb.TypError {
-						fmt.Printf("Unexpected tsb-packet: ch: %x, typ: %x payload: % x\n", td.Ch, td.Typ, td.Payload)
+						s := fmt.Sprintf("Unexpected tsb-packet: ch: %x, typ: %x payload: % x\n", td.Ch, td.Typ, td.Payload)
+						errChan <- []byte(s)
 					} else {
-						fmt.Printf("Anchor: %2d says: %s\n", td.Ch[0]/5, td.Payload)
+						s := fmt.Sprintf("Anchor: %2d says: %s\n", td.Ch[0]/5, td.Payload)
+						errChan <- []byte(s)
 					}
 				}
 			}
@@ -106,11 +108,11 @@ func (s *Socket) Write(p []byte) (int, error) {
 }
 
 func (s *Socket) Close() error {
-	//fmt.Printf("Close called\n")
+	fmt.Printf("Close called anchor:  %s-%02d\n", s.bl.name, s.fd)
 	close(s.closed)
 	s.Write([]byte{0x01, 0x09, 0x10, 0x00}) // no-op command to wake up the Read call if it's blocked
-	delete(s.bl.payloadGet, byte(s.fd*5+1))
 	s.rmu.Lock()
+	delete(s.bl.payloadGet, byte(s.fd*5+1))
 	defer s.rmu.Unlock()
 	return nil
 }
