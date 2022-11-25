@@ -45,6 +45,9 @@ func (bl *BeaconLine) BeaconLineInit(errChan chan []byte) error {
 		return err
 	}
 	bl.payloadGet = make(map[byte]chan []byte)
+	for i := 1; i <= bl.anchors; i++ {
+		bl.payloadGet[byte(i*5+1)] = make(chan []byte, 100)
+	}
 	fmt.Printf("client connected to tcp://%s \n", bl.url)
 	bl.tdPut = tsb.PutData(bl.conn)
 	bl.tdGet, bl.tdDone = tsb.GetData(bl.conn)
@@ -82,7 +85,7 @@ func (bl *BeaconLine) BeaconLineInit(errChan chan []byte) error {
 // If id is -1, the first available HCI device is returned.
 func NewSocket(bl *BeaconLine, id int) (*Socket, error) {
 	//fmt.Printf("HCI-id: %d\n", id)
-	bl.payloadGet[byte(id*5+1)] = make(chan []byte, 100)
+	//bl.payloadGet[byte(id*5+1)] = make(chan []byte, 100)
 	return &Socket{fd: id, bl: bl, closed: make(chan struct{})}, nil
 }
 
