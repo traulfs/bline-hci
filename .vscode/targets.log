@@ -7,7 +7,7 @@ make all --print-data-base --no-builtin-variables --no-builtin-rules --question
 
 # This program built for i386-apple-darwin11.3.0
 
-# Make data base, printed on Mon Nov 21 15:30:55 2022
+# Make data base, printed on Fri Dec 23 12:51:16 2022
 
 # Variables
 
@@ -24,11 +24,11 @@ ELECTRON_NO_ATTACH_CONSOLE = 1
 # automatic
 @F = $(notdir $@)
 # makefile
-CURDIR := /Users/thorsten/go/src/traulfs/bline-hci
+CURDIR := /Users/thorsten/go/src/traulfs/ble
 # makefile
 SHELL = /bin/sh
 # environment
-VSCODE_NLS_CONFIG = {"locale":"de","availableLanguages":{"*":"de"},"_languagePackId":"04f7ba4b39ffc394cb431776b98291e1.de","_translationsConfigFile":"/Users/thorsten/Library/Application Support/Code/clp/04f7ba4b39ffc394cb431776b98291e1.de/tcf.json","_cacheRoot":"/Users/thorsten/Library/Application Support/Code/clp/04f7ba4b39ffc394cb431776b98291e1.de","_resolvedLanguagePackCoreLocation":"/Users/thorsten/Library/Application Support/Code/clp/04f7ba4b39ffc394cb431776b98291e1.de/6261075646f055b99068d3688932416f2346dd3b","_corruptedFile":"/Users/thorsten/Library/Application Support/Code/clp/04f7ba4b39ffc394cb431776b98291e1.de/corrupted.info","_languagePackSupport":true}
+VSCODE_NLS_CONFIG = {"locale":"de","availableLanguages":{"*":"de"},"_languagePackId":"57b210fcd953486bc55140b84827125a.de","_translationsConfigFile":"/Users/thorsten/Library/Application Support/Code/clp/57b210fcd953486bc55140b84827125a.de/tcf.json","_cacheRoot":"/Users/thorsten/Library/Application Support/Code/clp/57b210fcd953486bc55140b84827125a.de","_resolvedLanguagePackCoreLocation":"/Users/thorsten/Library/Application Support/Code/clp/57b210fcd953486bc55140b84827125a.de/e8a3071ea4344d9d48ef8a4df2c097372b0c5161","_corruptedFile":"/Users/thorsten/Library/Application Support/Code/clp/57b210fcd953486bc55140b84827125a.de/corrupted.info","_languagePackSupport":true}
 # environment
 _ = /usr/bin/make
 # environment
@@ -42,7 +42,7 @@ __CFBundleIdentifier = com.microsoft.VSCode
 # environment
 INFOPATH = /opt/homebrew/share/info:
 # environment
-VSCODE_CWD = /Users/thorsten/go/src/traulfs/bline-hci
+VSCODE_CWD = /Users/thorsten/go/src/traulfs/ble
 # environment
 GOPROXY = https://proxy.golang.org,direct
 # environment
@@ -52,7 +52,7 @@ GOROOT = /usr/local/go
 # environment
 GOPATH = /Users/thorsten/go
 # environment
-LaunchInstanceID = DF42A97B-C764-4D21-A792-681672957056
+LaunchInstanceID = 123180A2-5924-4A9E-9A8F-F0DE3887F7EC
 # environment
 ELECTRON_RUN_AS_NODE = 1
 # environment
@@ -60,15 +60,15 @@ ANDROID_HOME = /Users/thorsten/Library/Android/Sdk
 # default
 .FEATURES := target-specific order-only second-expansion else-if archives jobserver check-symlink
 # environment
-SSH_AUTH_SOCK = /private/tmp/com.apple.launchd.X7I7dG7KdH/Listeners
+SSH_AUTH_SOCK = /private/tmp/com.apple.launchd.pvx4bcmoNd/Listeners
 # automatic
 %F = $(notdir $%)
 # environment
-DISPLAY = /private/tmp/com.apple.launchd.k8ZJcWlu7h/org.xquartz:0
+DISPLAY = /private/tmp/com.apple.launchd.DO5w3rsnqR/org.xquartz:0
 # environment
 CONDA_EXE = /Users/thorsten/opt/anaconda3/bin/conda
 # environment
-PWD = /Users/thorsten/go/src/traulfs/bline-hci
+PWD = /Users/thorsten/go/src/traulfs/ble
 # environment
 HOMEBREW_CELLAR = /opt/homebrew/Cellar
 # environment
@@ -84,7 +84,7 @@ MAKEFILEPATH := /Applications/Xcode.app/Contents/Developer/Makefiles
 # environment
 VSCODE_CLI = 1
 # environment
-VSCODE_CODE_CACHE_PATH = /Users/thorsten/Library/Application Support/Code/CachedData/6261075646f055b99068d3688932416f2346dd3b
+VSCODE_CODE_CACHE_PATH = /Users/thorsten/Library/Application Support/Code/CachedData/e8a3071ea4344d9d48ef8a4df2c097372b0c5161
 # environment
 LOGNAME = thorsten
 # environment
@@ -112,13 +112,13 @@ USER = thorsten
 # makefile
 .DEFAULT_GOAL := 
 # environment
-TERM_SESSION_ID = 1C6481F5-889F-406C-94CD-D86A8BED3054
+TERM_SESSION_ID = A00EE08F-43A5-447E-9B0E-2D8877B66C45
 # automatic
 %D = $(patsubst %/,%,$(dir $%))
 # environment
 CONDA_SHLVL = 2
-# environment
-TERM_SESSION_CLASS_ID = 962EF1A3-5A58-4490-AFA2-92F27DA5270A
+# default
+MAKE_COMMAND := /Applications/Xcode.app/Contents/Developer/usr/bin/make
 # environment
 TERM_PROGRAM = Apple_Terminal
 # default
@@ -128,7 +128,7 @@ TMPDIR = /var/folders/yt/7tyqb03d4ns90njkb13mlxlr0000gn/T/
 # automatic
 *F = $(notdir $*)
 # environment
-VSCODE_IPC_HOOK = /Users/thorsten/Library/Application Support/Code/1.73.1-main.sock
+VSCODE_IPC_HOOK = /Users/thorsten/Library/Application Support/Code/1.74.2-main.sock
 # environment
 MallocNanoZone = 0
 # makefile
@@ -140,7 +140,7 @@ MFLAGS = -Rrqp
 # environment
 TERM_PROGRAM_VERSION = 447
 # environment
-XPC_SERVICE_NAME = application.com.microsoft.VSCode.51437040.51437049.339FE975-7E79-47B2-BD9D-00C1823525F6
+XPC_SERVICE_NAME = application.com.microsoft.VSCode.57082364.57082370.EBC546C9-E95C-46C5-9022-96319CC7773D
 # environment
 HOMEBREW_PREFIX = /opt/homebrew
 # automatic
@@ -149,8 +149,6 @@ HOMEBREW_PREFIX = /opt/homebrew
 +F = $(notdir $+)
 # environment
 HOMEBREW_REPOSITORY = /opt/homebrew
-# default
-MAKE_COMMAND := /Applications/Xcode.app/Contents/Developer/usr/bin/make
 # environment
 __CF_USER_TEXT_ENCODING = 0x1F5:0x0:0x3
 # environment
@@ -169,8 +167,6 @@ SECURITYSESSIONID = 186b3
 ^F = $(notdir $^)
 # default
 SUFFIXES := 
-# environment
-_CE_M = 
 # default
 .INCLUDE_DIRS = /usr/local/include
 # environment
@@ -180,13 +176,11 @@ CONDA_PREFIX = /Users/thorsten/opt/anaconda3
 # environment
 TERM = xterm-256color
 # environment
-VSCODE_PID = 581
-# environment
-_CE_CONDA = 
+VSCODE_PID = 13227
 # environment
 LANG = C
 # variable set hash-table stats:
-# Load=87/1024=8%, Rehash=0, Collisions=5/108=5%
+# Load=84/1024=8%, Rehash=0, Collisions=4/105=4%
 
 # Pattern-specific Variable Values
 
@@ -194,7 +188,7 @@ LANG = C
 
 # Directories
 
-# . (device 16777231, inode 39743337): 27 files, no impossibilities.
+# . (device 16777231, inode 57225815): 27 files, no impossibilities.
 
 # 27 files, no impossibilities in 1 directories.
 
@@ -268,7 +262,7 @@ GNUmakefile:
 # strcache size: total = 0 / max = 0 / min = 4096 / avg = 0
 # strcache free: total = 0 / max = 0 / min = 4096 / avg = 0
 
-# Finished Make data base on Mon Nov 21 15:30:55 2022
+# Finished Make data base on Fri Dec 23 12:51:16 2022
 
  
 make: *** No rule to make target `all'.  Stop.
