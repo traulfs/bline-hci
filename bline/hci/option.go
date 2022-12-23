@@ -4,10 +4,10 @@ import (
 	"errors"
 	"time"
 
-	"github.com/traulfs/bline-hci/bline/hci/evt"
+	"traulfs/Bline/ble/bline/hci/evt"
 
-	"github.com/traulfs/bline-hci/bline/hci/cmd"
-	"github.com/traulfs/bline-hci/bline/hci/socket"
+	"traulfs/Bline/ble/bline/hci/cmd"
+	"traulfs/Bline/ble/bline/hci/socket"
 )
 
 // SetBeaconLine

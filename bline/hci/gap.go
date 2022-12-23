@@ -7,10 +7,11 @@ import (
 	"net"
 	"time"
 
+	ble "traulfs/Bline/ble"
+	"traulfs/Bline/ble/bline/adv"
+	"traulfs/Bline/ble/bline/gatt"
+
 	"github.com/pkg/errors"
-	ble "github.com/traulfs/bline-hci"
-	"github.com/traulfs/bline-hci/bline/adv"
-	"github.com/traulfs/bline-hci/bline/gatt"
 )
 
 // Addr ...
@@ -167,6 +168,7 @@ func (h *HCI) AdvertiseIBeaconData(md []byte) error {
 func (h *HCI) AdvertiseIBeacon(u ble.UUID, major, minor uint16, pwr int8) error {
 	ad, err := adv.NewPacket(adv.IBeacon(u, major, minor, pwr))
 	if err != nil {
+		fmt.Printf("AdvertiseIBeacon Error: %v\n", err)
 		return err
 	}
 	if err := h.SetAdvertisement(ad.Bytes(), nil); err != nil {

@@ -7,7 +7,7 @@ import (
 	"fmt"
 	"time"
 
-	"github.com/traulfs/bline-hci/bline/hci/cmd"
+	"traulfs/Bline/ble/bline/hci/cmd"
 )
 
 // Signal ...

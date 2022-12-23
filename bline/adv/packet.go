@@ -3,7 +3,7 @@ package adv
 import (
 	"encoding/binary"
 
-	ble "github.com/traulfs/bline-hci"
+	ble "traulfs/Bline/ble"
 )
 
 // Packet is an implemntation of ble.AdvPacket for crafting or parsing an advertising packet or scan response.

@@ -3,9 +3,9 @@ package hci
 import (
 	"net"
 
-	ble "github.com/traulfs/bline-hci"
-	"github.com/traulfs/bline-hci/bline/adv"
-	"github.com/traulfs/bline-hci/bline/hci/evt"
+	ble "traulfs/Bline/ble"
+	"traulfs/Bline/ble/bline/adv"
+	"traulfs/Bline/ble/bline/hci/evt"
 )
 
 // RandomAddress is a Random Device Address.

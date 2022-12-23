@@ -8,10 +8,11 @@ import (
 	"io"
 	"net"
 
+	ble "traulfs/Bline/ble"
+	"traulfs/Bline/ble/bline/hci/cmd"
+	"traulfs/Bline/ble/bline/hci/evt"
+
 	"github.com/pkg/errors"
-	ble "github.com/traulfs/bline-hci"
-	"github.com/traulfs/bline-hci/bline/hci/cmd"
-	"github.com/traulfs/bline-hci/bline/hci/evt"
 )
 
 // Conn ...

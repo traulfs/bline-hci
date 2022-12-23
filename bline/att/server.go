@@ -7,7 +7,7 @@ import (
 	"io"
 	"time"
 
-	ble "github.com/traulfs/bline-hci"
+	ble "traulfs/Bline/ble"
 )
 
 type conn struct {

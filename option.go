@@ -3,9 +3,9 @@ package ble
 import (
 	"time"
 
-	"github.com/traulfs/bline-hci/bline/hci/cmd"
-	"github.com/traulfs/bline-hci/bline/hci/evt"
-	"github.com/traulfs/bline-hci/bline/hci/socket"
+	"traulfs/Bline/ble/bline/hci/cmd"
+	"traulfs/Bline/ble/bline/hci/evt"
+	"traulfs/Bline/ble/bline/hci/socket"
 )
 
 // DeviceOption is an interface which the device should implement to allow using configuration options

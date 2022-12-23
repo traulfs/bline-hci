@@ -3,7 +3,7 @@ package hci
 import (
 	"sync"
 
-	"github.com/traulfs/bline-hci/bline/hci/cmd"
+	"traulfs/Bline/ble/bline/hci/cmd"
 )
 
 type params struct {
@@ -30,8 +30,10 @@ func (p *params) init() {
 	}
 	p.advParams = cmd.LESetAdvertisingParameters{
 		//		AdvertisingIntervalMin:  0x0020,    // 0x0020 - 0x4000; N * 0.625 msec
-		AdvertisingIntervalMin: 0x00A0, // 0x0020 - 0x4000; N * 0.625 msec
+		//AdvertisingIntervalMin: 0x00A0, // 0x0020 - 0x4000; N * 0.625 msec
+		AdvertisingIntervalMin: 0x0640, // 0x0020 - 0x4000; N * 0.625 msec
 		//		AdvertisingIntervalMax:  0x0020,    // 0x0020 - 0x4000; N * 0.625 msec
+		//AdvertisingIntervalMax:  0x0640,    // 0x0020 - 0x4000; N * 0.625 msec
 		AdvertisingIntervalMax:  0x0640,    // 0x0020 - 0x4000; N * 0.625 msec
 		AdvertisingType:         0x00,      // 00: ADV_IND, 0x01: DIRECT(HIGH), 0x02: SCAN, 0x03: NONCONN, 0x04: DIRECT(LOW)
 		OwnAddressType:          0x00,      // 0x00: public, 0x01: random

@@ -4,7 +4,7 @@ import (
 	"encoding/binary"
 	"fmt"
 
-	ble "github.com/traulfs/bline-hci"
+	ble "traulfs/Bline/ble"
 )
 
 // A DB is a contiguous range of attributes.

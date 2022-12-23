@@ -4,8 +4,8 @@ import (
 	"log"
 	"sync"
 
-	ble "github.com/traulfs/bline-hci"
-	"github.com/traulfs/bline-hci/bline/att"
+	ble "traulfs/Bline/ble"
+	"traulfs/Bline/ble/bline/att"
 )
 
 // NewServerWithName creates a new Server with the specified name

@@ -3,8 +3,10 @@ package socket
 import (
 	"fmt"
 	"io"
+	"log"
 	"net"
 	"sync"
+	"time"
 
 	"github.com/traulfs/tsb"
 )
@@ -18,7 +20,7 @@ type BeaconLine struct {
 	tdPut      chan tsb.TsbData
 	tdGet      chan tsb.TsbData
 	tdDone     chan struct{}
-	payloadGet map[byte]chan []byte
+	PayloadGet map[byte]chan []byte
 }
 
 // Socket implements a HCI User Channel as ReadWriteCloser.
@@ -40,38 +42,38 @@ func (bl *BeaconLine) Name() string {
 
 func (bl *BeaconLine) BeaconLineInit(errChan chan []byte) error {
 	var err error
+	const chanLen int = 10
+	tsb.ErrorVerbose = true
 	bl.conn, err = net.Dial("tcp", bl.url)
 	if err != nil {
 		return err
 	}
-	bl.payloadGet = make(map[byte]chan []byte)
+	bl.PayloadGet = make(map[byte]chan []byte)
 	for i := 1; i <= bl.anchors; i++ {
-		bl.payloadGet[byte(i*5+1)] = make(chan []byte, 100)
+		bl.PayloadGet[byte(i*5+1)] = make(chan []byte, chanLen)
 	}
-	fmt.Printf("client connected to tcp://%s \n", bl.url)
+	log.Printf("client connected to tcp://%s \n", bl.url)
 	bl.tdPut = tsb.PutData(bl.conn)
 	bl.tdGet, bl.tdDone = tsb.GetData(bl.conn)
-	//TsbServer(bl.tsbPort)
 	go func() {
 		for {
 			select {
 			case <-bl.tdDone:
-				fmt.Printf("client connection closed!")
+				log.Printf("client connection closed!")
 				return
 			case td := <-bl.tdGet:
 				if td.Typ[0] == tsb.TypHci {
-					if bl.payloadGet[td.Ch[0]] != nil {
-						bl.payloadGet[td.Ch[0]] <- td.Payload
-						//} else {
-						//fmt.Printf("tsb channel not initialized: ch: %x, typ: %x payload: % x\n", td.Ch, td.Typ, td.Payload)
+					if bl.PayloadGet[td.Ch[0]] != nil {
+						if len(bl.PayloadGet[td.Ch[0]]) < chanLen {
+							bl.PayloadGet[td.Ch[0]] <- td.Payload
+						}
 					}
 				} else {
-					TsbOut <- td
 					if td.Typ[0] != tsb.TypError {
-						s := fmt.Sprintf("Unexpected tsb-packet: ch: %x, typ: %x payload: % x\n", td.Ch, td.Typ, td.Payload)
+						s := fmt.Sprintf("%d: Unexpected tsb-packet: ch: %x, typ: %x payload: % x\n", time.Now().UnixMilli(), td.Ch, td.Typ, td.Payload)
 						errChan <- []byte(s)
 					} else {
-						s := fmt.Sprintf("Anchor: %2d says: %s\n", td.Ch[0]/5, td.Payload)
+						s := fmt.Sprintf("%d: Anchor: %2d says: %s\n", time.Now().UnixMilli(), td.Ch[0]/5, td.Payload)
 						errChan <- []byte(s)
 					}
 				}
@@ -84,8 +86,8 @@ func (bl *BeaconLine) BeaconLineInit(errChan chan []byte) error {
 // NewSocket returns a HCI User Channel of specified device id.
 // If id is -1, the first available HCI device is returned.
 func NewSocket(bl *BeaconLine, id int) (*Socket, error) {
-	//fmt.Printf("HCI-id: %d\n", id)
-	//bl.payloadGet[byte(id*5+1)] = make(chan []byte, 100)
+	//fmt.Printf("NewSocket: %s-%d\n", bl.qName(), id)
+	//bl.PayloadGet[byte(id*5+1)] = make(chan []byte, 100)
 	return &Socket{fd: id, bl: bl, closed: make(chan struct{})}, nil
 }
 
@@ -96,9 +98,12 @@ func (s *Socket) Read(p []byte) (int, error) {
 		select {
 		case <-s.closed:
 			return 0, io.EOF
-		case payload := <-s.bl.payloadGet[byte(s.fd*5+1)]:
+		case payload := <-s.bl.PayloadGet[byte(s.fd*5+1)]:
+			//fmt.Printf("payload: %d %x\n", s.fd, payload)
 			n := copy(p, payload)
 			return n, nil
+		case <-time.After(5 * time.Second):
+			return 0, fmt.Errorf("timeout")
 		}
 	}
 }
@@ -115,7 +120,7 @@ func (s *Socket) Close() error {
 	close(s.closed)
 	s.Write([]byte{0x01, 0x09, 0x10, 0x00}) // no-op command to wake up the Read call if it's blocked
 	s.rmu.Lock()
-	delete(s.bl.payloadGet, byte(s.fd*5+1))
+	delete(s.bl.PayloadGet, byte(s.fd*5+1))
 	defer s.rmu.Unlock()
 	return nil
 }

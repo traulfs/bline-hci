@@ -22,8 +22,8 @@ github.com/stretchr/testify v1.8.1 h1:w7B6lhMri9wdJUVmEZPGGhZzrYTPvgJArz7wNPgYKs
 github.com/stretchr/testify v1.8.1/go.mod h1:w2LPCIKwWwSfY2zedu0+kehJoqGctiVI29o6fzry7u4=
 github.com/tarm/serial v0.0.0-20180830185346-98f6abe2eb07 h1:UyzmZLoiDWMRywV4DUYb9Fbt8uiOSooupjTq10vpvnU=
 github.com/tarm/serial v0.0.0-20180830185346-98f6abe2eb07/go.mod h1:kDXzergiv9cbyO7IOYJZWg1U88JhDg3PB6klq9Hg2pA=
-github.com/traulfs/tsb v0.0.0-20221114204004-ca4e4ba3ee16 h1:DPa5RVw+C+CcLSsmWyxUQa8KZVCdzplB3VOnxb23Gw8=
-github.com/traulfs/tsb v0.0.0-20221114204004-ca4e4ba3ee16/go.mod h1:YDqX4DY8+U/SoLG22Ye41zDaGicwL1K3xi9jLR3BT0c=
+github.com/traulfs/tsb v0.0.0-20221216123923-7cb8e1a45635 h1:PHYH2UCAzs5I3ovXIN/cvdL9818R5SyPysan5FIJaqw=
+github.com/traulfs/tsb v0.0.0-20221216123923-7cb8e1a45635/go.mod h1:YDqX4DY8+U/SoLG22Ye41zDaGicwL1K3xi9jLR3BT0c=
 golang.org/x/sys v0.0.0-20220811171246-fbc7d0a398ab/go.mod h1:oPkhp1MJrh7nUepCBck5+mAzfO9JrbApNNgaTdGDITg=
 golang.org/x/sys v0.1.0 h1:kunALQeHf1/185U1i0GOB/fy1IPRDDpuoOOqRReG57U=
 golang.org/x/sys v0.1.0/go.mod h1:oPkhp1MJrh7nUepCBck5+mAzfO9JrbApNNgaTdGDITg=

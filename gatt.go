@@ -6,8 +6,9 @@ import (
 	"os/signal"
 	"syscall"
 
+	"traulfs/Bline/ble/bline/hci/socket"
+
 	"github.com/pkg/errors"
-	"github.com/traulfs/bline-hci/bline/hci/socket"
 )
 
 // ErrDefaultDevice ...

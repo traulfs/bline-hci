@@ -9,11 +9,12 @@ import (
 	"sync"
 	"time"
 
+	ble "traulfs/Bline/ble"
+	"traulfs/Bline/ble/bline/hci/cmd"
+	"traulfs/Bline/ble/bline/hci/evt"
+	"traulfs/Bline/ble/bline/hci/socket"
+
 	"github.com/pkg/errors"
-	ble "github.com/traulfs/bline-hci"
-	"github.com/traulfs/bline-hci/bline/hci/cmd"
-	"github.com/traulfs/bline-hci/bline/hci/evt"
-	"github.com/traulfs/bline-hci/bline/hci/socket"
 )
 
 // Command ...
@@ -148,6 +149,11 @@ func (h *HCI) Init() error {
 	if err != nil {
 		return err
 	}
+	for len(h.bl.PayloadGet[byte(h.id*5+1)]) > 0 {
+		<-h.bl.PayloadGet[byte(h.id*5+1)]
+		//fmt.Printf("d= %v\n", d)
+	}
+	//h.bl.PayloadGet[byte(h.id*5+1)] = make(chan []byte, 100)
 	h.skt = skt
 
 	h.setAllowedCommands(1)

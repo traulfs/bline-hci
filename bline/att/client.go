@@ -5,8 +5,9 @@ import (
 	"fmt"
 	"time"
 
+	ble "traulfs/Bline/ble"
+
 	"github.com/pkg/errors"
-	ble "github.com/traulfs/bline-hci"
 )
 
 // NotificationHandler handles notification or indication.

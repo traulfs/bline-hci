@@ -1,6 +1,6 @@
 package ble
 
-import "github.com/traulfs/bline-hci/bline/hci/socket"
+import "traulfs/Bline/ble/bline/hci/socket"
 
 // AdvHandler handles advertisement.
 type AdvHandler func(a Advertisement, bl *socket.BeaconLine, anchor int)

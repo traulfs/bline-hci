@@ -1,6 +1,6 @@
 package att
 
-import ble "github.com/traulfs/bline-hci"
+import ble "traulfs/Bline/ble"
 
 // attr is a BLE attribute.
 type attr struct {

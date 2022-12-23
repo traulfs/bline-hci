@@ -5,11 +5,12 @@ import (
 	"io"
 	"log"
 
+	ble "traulfs/Bline/ble"
+	"traulfs/Bline/ble/bline/att"
+	"traulfs/Bline/ble/bline/gatt"
+	"traulfs/Bline/ble/bline/hci"
+
 	"github.com/pkg/errors"
-	ble "github.com/traulfs/bline-hci"
-	"github.com/traulfs/bline-hci/bline/att"
-	"github.com/traulfs/bline-hci/bline/gatt"
-	"github.com/traulfs/bline-hci/bline/hci"
 )
 
 // NewDevice returns the default HCI device.
