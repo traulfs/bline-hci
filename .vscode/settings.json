@@ -1,6 +1,0 @@
-{
-    "makefile.extensionOutputFolder": "./.vscode",
-    "go.toolsEnvVars": {
-        "GOOS": "darwin"
-    }
-}
